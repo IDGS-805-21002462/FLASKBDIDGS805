@@ -45,6 +45,20 @@ def alumnos_view():
 		return redirect(url_for('index'))
 	return render_template("Alumnos.html", form=create_form)
 
+@app.route("/detalles", methods=["GET", "POST"])
+def detalles():
+
+	if request.method == 'GET':
+		id=request.args.get('id')
+
+		#select de alumno tomando un id
+		alum1=db.session.query(Alumnos).filter(Alumnos.id == id).first()
+
+		nombre=alum1.nombre
+		apaterno=alum1.apaterno
+		email=alum1.email
+
+		return render_template('detalles.html', id=id,nombre=nombre,apaterno=apaterno,email=email)
 
 if __name__ == '__main__':
 	csrf.init_app(app)

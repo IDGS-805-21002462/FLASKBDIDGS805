@@ -4,59 +4,78 @@
 <div class="container mx-auto px-4 mt-10">
 
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Listado de Alumnos</h1>
-        <a href="Alumnos" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-            + Nuevo Alumno
+        <div>
+            <h1 class="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Directorio de Alumnos</h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Gestiona los registros, edita o visualiza la información a detalle.</p>
+        </div>
+        <a href="Alumnos" class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition transform hover:-translate-y-0.5 shadow-lg">
+            <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+            Nuevo Alumno
         </a>
     </div>
 
-    <div class="relative overflow-x-auto shadow-xl sm:rounded-lg border border-gray-200 dark:border-gray-700">
+    <div class="relative overflow-x-auto shadow-2xl sm:rounded-xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-900 dark:text-gray-300 border-b dark:border-gray-700">
                 <tr>
-                    <th scope="col" class="px-6 py-4">ID</th>
-                    <th scope="col" class="px-6 py-4">Nombre Completo</th>
-                    <th scope="col" class="px-6 py-4">Email</th>
-                    <th scope="col" class="px-6 py-4">Fecha de Registro</th>
-                    <th scope="col" class="px-6 py-4 text-center">Acciones</th>
+                    <th scope="col" class="px-6 py-4 font-bold tracking-wider">ID</th>
+                    <th scope="col" class="px-6 py-4 font-bold tracking-wider">Nombre Completo</th>
+                    <th scope="col" class="px-6 py-4 font-bold tracking-wider">Email</th>
+                    <th scope="col" class="px-6 py-4 font-bold tracking-wider">Registro</th>
+                    <th scope="col" class="px-6 py-4 text-center font-bold tracking-wider">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {% for alumno in alumnos %}
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition duration-200">
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-700 transition duration-200 group">
 
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        #{{ alumno.id }}
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="bg-gray-100 text-gray-800 text-xs font-bold px-2.5 py-1 rounded-full dark:bg-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
+                            #{{ alumno.id }}
+                        </span>
                     </td>
 
-                    <td class="px-6 py-4 font-medium text-gray-800 dark:text-white">
+                    <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                         {{ alumno.nombre }} {{ alumno.apaterno }}
                     </td>
 
                     <td class="px-6 py-4">
-                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                        <span class="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-1 rounded-md dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
                             {{ alumno.email }}
                         </span>
                     </td>
 
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
                         {{ alumno.created_at }}
                     </td>
 
-                    <td class="px-6 py-4 text-center">
-                        <div class="flex justify-center space-x-3">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-                            <span class="text-gray-300">|</span>
-                            <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Eliminar</a>
+                    <td class="px-6 py-4">
+                        <div class="flex justify-center items-center space-x-2 opacity-90 group-hover:opacity-100 transition-opacity">
+
+                            <a href="/detalles?id={{ alumno.id }}" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-teal-500 rounded-lg hover:bg-teal-600 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800 shadow-sm transition">
+                                Detalles
+                            </a>
+
+                            <a href="#" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800 shadow-sm transition">
+                                Editar
+                            </a>
+
+                            <a href="#" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 shadow-sm transition">
+                                Borrar
+                            </a>
+
                         </div>
                     </td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="5" class="px-6 py-10 text-center text-gray-500 bg-white dark:bg-gray-800">
+                    <td colspan="5" class="px-6 py-12 text-center text-gray-500 bg-gray-50 dark:bg-gray-800/50">
                         <div class="flex flex-col items-center justify-center">
-                            <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
-                            <p>No hay alumnos registrados todavía.</p>
+                            <div class="bg-gray-200 dark:bg-gray-700 rounded-full p-3 mb-4">
+                                <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            </div>
+                            <p class="text-lg font-medium text-gray-900 dark:text-white">Aún no hay alumnos</p>
+                            <p class="text-sm mt-1">Comienza agregando un nuevo registro al sistema.</p>
                         </div>
                     </td>
                 </tr>
