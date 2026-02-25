@@ -21,6 +21,7 @@
                     <th scope="col" class="px-6 py-4 font-bold tracking-wider">ID</th>
                     <th scope="col" class="px-6 py-4 font-bold tracking-wider">Nombre Completo</th>
                     <th scope="col" class="px-6 py-4 font-bold tracking-wider">Email</th>
+                    <th scope="col" class="px-6 py-4 font-bold tracking-wider">Teléfono</th>
                     <th scope="col" class="px-6 py-4 font-bold tracking-wider">Registro</th>
                     <th scope="col" class="px-6 py-4 text-center font-bold tracking-wider">Acciones</th>
                 </tr>
@@ -36,13 +37,17 @@
                     </td>
 
                     <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                        {{ alumno.nombre }} {{ alumno.apaterno }}
+                        {{ alumno.nombre }} {{ alumno.apellidos }}
                     </td>
 
                     <td class="px-6 py-4">
                         <span class="bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-1 rounded-md dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
                             {{ alumno.email }}
                         </span>
+                    </td>
+
+                    <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
+                        {{ alumno.telefono }}
                     </td>
 
                     <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
@@ -56,11 +61,11 @@
                                 Detalles
                             </a>
 
-                            <a href="#" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800 shadow-sm transition">
+                            <a href="/modificar?id={{ alumno.id }}" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800 shadow-sm transition">
                                 Editar
                             </a>
 
-                            <a href="#" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 shadow-sm transition">
+                            <a href="/eliminar?id={{ alumno.id }}" class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 shadow-sm transition">
                                 Borrar
                             </a>
 
@@ -69,7 +74,7 @@
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="5" class="px-6 py-12 text-center text-gray-500 bg-gray-50 dark:bg-gray-800/50">
+                    <td colspan="6" class="px-6 py-12 text-center text-gray-500 bg-gray-50 dark:bg-gray-800/50">
                         <div class="flex flex-col items-center justify-center">
                             <div class="bg-gray-200 dark:bg-gray-700 rounded-full p-3 mb-4">
                                 <svg class="w-8 h-8 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>

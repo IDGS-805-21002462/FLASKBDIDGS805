@@ -1,15 +1,15 @@
-from wtforms import Form, PasswordField
+from wtforms import Form, PasswordField, HiddenField
 from wtforms import IntegerField, StringField
 from wtforms import EmailField
 from wtforms import validators
 
 class UserForm(Form):
-    id=IntegerField("id")
+    id = HiddenField("id")
     nombre = StringField("Nombre",[
         validators.DataRequired("Ingresa tu nombre"),
         validators.length(min=4, max=10, message="Ingresa un nombre valido")
     ])
-    apaterno = StringField("Apaterno",[
+    apellidos = StringField("apellidos",[
         validators.DataRequired("Ingresa tu Apellido Paterno"),
         validators.length(min=4, max=10, message="Ingresa un apellido Paterno valido")
     ])
@@ -24,11 +24,15 @@ class UserForm2(Form):
         validators.DataRequired("Ingresa tu nombre"),
         validators.length(min=4, max=10, message="Ingresa un nombre valido")
     ])
-    apaterno = StringField("Apaterno",[
+    apellidos = StringField("apellidos",[
         validators.DataRequired("Ingresa tu Apellido Paterno"),
         validators.length(min=4, max=10, message="Ingresa un apellido Paterno valido")
     ])
     email = EmailField("Correo",[
         validators.DataRequired("Ingresa tu Correo"),
         validators.Email(message="Ingresa un correo valido")
+    ])
+    telefono = StringField("Telefono",[
+        validators.DataRequired("Ingresa tu Telefono"),
+        validators.length(min=10, max=10, message="Ingresa un telefono valido")
     ])
