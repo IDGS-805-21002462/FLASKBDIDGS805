@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% block container %}
+<div class="flex justify-center mt-10">
+
+    <div class="relative bg-neutral-primary-soft max-w-xs w-full p-6 border border-default rounded-base shadow-xs">
+
+        <button id="dropdownButton_{{ id }}" data-dropdown-toggle="dropdown_{{ id }}" class="absolute top-2 end-2 text-body hover:text-heading bg-neutral-primary-soft box-border border border-transparent hover:bg-neutral-tertiary focus:ring-4 focus:ring-neutral-tertiary rounded-base p-1.5 focus:outline-none" type="button">
+            <span class="sr-only">Open dropdown</span>
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="3" d="M6 12h.01m6 0h.01m5.99 0h.01"/></svg>
+        </button>
+
+        <div id="dropdown_{{ id }}" class="z-10 bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-36 block hidden">
+            <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownButton_{{ id }}">
+                <li>
+                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">Edit</a>
+                </li>
+                <li>
+                    <a href="#" class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md">Export Data</a>
+                </li>
+                <li>
+                    <a href="#" class="inline-flex items-center w-full p-2 text-fg-danger hover:bg-neutral-tertiary-medium rounded-md">Delete</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <img class="w-24 h-24 mb-6 rounded-full object-cover" src="{{ url_for('static', filename='img/user.png') }}" alt="Foto de Usuario"/>
+
+            <h5 class="mb-0.5 text-xl font-semibold tracking-tight text-heading">
+                Nombre: {{ alumno.nombre }} {{ alumno.apellidos }}
+            </h5>
+
+            <span class="text-sm text-body">Correo: {{ alumno.email }}</span>
+            <span class="text-sm text-body">Teléfono: {{ alumno.telefono }}</span>
+
+            <h3 class="font-semibold text-lg mt-4">Mis Cursos:</h3>
+            <div class="grid grid-cols-1 gap-2">
+                {% for curso in alumno.cursos %}
+                    <div class="p-2 bg-gray-100 rounded dark:bg-gray-700">
+                        <strong>{{ curso.nombre }}</strong> - Maestro: {{ curso.maestro.nombre }}
+                    </div>
+                {% else %}
+                    <p class="text-sm text-gray-500">Este alumno aún no tiene cursos inscritos.</p>
+                {% endfor %}
+            </div>
+            <div class="mt-8 p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Inscribir en nuevo curso</h3>
+
+            <form action="{{ url_for('alumnos.inscribir') }}" method="POST" class="flex flex-col sm:flex-row gap-4">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <input type="hidden" name="alumno_id" value="{{ alumno.id }}">
+                <div class="flex-grow">
+                    <select name="curso_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                        <option selected disabled>Selecciona un curso...</option>
+                        {% for c in todos_los_cursos %}
+                            {% if c not in alumno.cursos %}
+                                <option value="{{ c.id }}">{{ c.nombre }} ({{ c.maestro.nombre }})</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="text-white bg-green-600 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 shadow-lg transition transform hover:-translate-y-0.5">
+                    Inscribir ahora
+                </button>
+            </form>
+        </div>
+        </div>
+
+            <a href="{{ url_for('alumnos.index') }}" class="mt-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none">
+                Regresar
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

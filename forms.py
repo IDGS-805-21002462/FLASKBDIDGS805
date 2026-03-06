@@ -1,4 +1,4 @@
-from wtforms import Form, PasswordField, HiddenField
+from wtforms import Form, PasswordField, HiddenField, SelectField
 from wtforms import IntegerField, StringField
 from wtforms import EmailField
 from wtforms import validators
@@ -55,3 +55,14 @@ class MaestroForm(Form):
         validators.DataRequired("Ingresa tu Especialidad"),
         validators.length(min=4, max=50, message="Ingresa una especialidad valida")
     ])
+
+class CursoForm(Form):
+    id = IntegerField("id")
+    nombre = StringField("Nombre del Curso", [
+        validators.DataRequired("Ingresa el nombre del curso"),
+        validators.length(min=4, max=150, message="Ingresa un nombre válido")
+    ])
+    descripcion = StringField("Descripción", [
+        validators.DataRequired("Ingresa una descripción")
+    ])
+    maestro_id = SelectField("Maestro", coerce=int, choices=[])
