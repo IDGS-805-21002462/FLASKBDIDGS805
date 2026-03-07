@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models import db, Curso, Maestros
 import forms
+from . import cursos
 
-cursos = Blueprint('cursos', __name__)
 
 @cursos.route("/cursos", methods=["GET", "POST"])
 def index():
